@@ -1,0 +1,3 @@
+jq '[with_entries(.key |= tostring) as $keys | 
+     [to_entries | .[] | .key as $i | 
+     {($i+1|tostring): (.value | with_entries(.key |= gsub(" |version"; "")))}] | add]' input.json
